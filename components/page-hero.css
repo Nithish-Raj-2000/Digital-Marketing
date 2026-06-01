@@ -70,7 +70,7 @@ body.page-inner .page-content > .page-hero:first-child {
 
 .home-hero-wrap {
   min-height: 100vh;
-  padding-top: 90px;
+  /* padding-top: 20px; */
   box-sizing: border-box;
   background:
     linear-gradient(rgba(5, 15, 35, 0.8), rgba(5, 15, 35, 0.8)),

@@ -47,6 +47,16 @@ img{
   margin-bottom:20px;
 }
 
+.tag-home{
+  background:#14f1c130;
+  color:#14f1c1;
+  padding:8px 18px;
+  border-radius:30px;
+  display:inline-block;
+  margin-bottom:-80px;
+  /* margin-top: 30px; */
+}
+
 .hero-content h1{
   font-size:68px;
   line-height:1.1;
