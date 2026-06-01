@@ -1,0 +1,303 @@
+/* Animations & hover effects — layout unchanged */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 rgba(20, 241, 193, 0); }
+  50% { box-shadow: 0 0 24px rgba(20, 241, 193, 0.35); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* Hero entrance */
+.home-hero-wrap .hero-content {
+  animation: slideInLeft 0.9s ease forwards;
+}
+
+.home-hero-wrap .hero-image {
+  animation: fadeInUp 0.9s ease 0.15s forwards;
+  opacity: 0;
+}
+
+.home-hero-wrap .hero-image img {
+  animation: floatY 5s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.page-hero .hero-content {
+  animation: fadeInUp 0.85s ease forwards;
+}
+
+/* Hover lifts */
+.service-card,
+.team-card,
+.feature-card,
+.price-card,
+.portfolio-card,
+.info-card,
+.office-card,
+.why-card,
+.auth-card,
+.stat-item {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Never animate/hide icon glyphs (auth field icons styled in auth.css) */
+.auth-perks i,
+.social-icons .social-icon,
+.auth-toast__icon {
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+.auth-perks i {
+  font-size: inherit;
+}
+
+.service-card:hover,
+.team-card:hover,
+.feature-card:hover,
+.price-card:hover,
+.portfolio-card:hover,
+.info-card:hover,
+.office-card:hover,
+.why-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(7, 16, 31, 0.14);
+}
+
+.service-card img,
+.team-card img,
+.portfolio-card img,
+.about-image img {
+  transition: transform 0.5s ease;
+}
+
+.service-card:hover img,
+.team-card:hover img,
+.portfolio-card:hover img,
+.about-image:hover img {
+  transform: scale(1.06);
+}
+
+/* Buttons & links */
+.btn,
+.primary-btn,
+.secondary-btn,
+.auth-submit,
+.auth-social-btn,
+.price-card button,
+button.faq-question {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.btn:hover,
+.primary-btn:hover,
+.secondary-btn:hover,
+.cta-btn:hover,
+.auth-submit:hover,
+.auth-social-btn:hover,
+.price-card button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(20, 241, 193, 0.35);
+}
+
+/* Footer social — hover only (icon font fixed in base.css) */
+.social-icons a:hover {
+  transform: translateY(-4px);
+}
+
+/* Horizontal slide track (portfolio / grids) */
+.slider-track {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.slider-track > * {
+  scroll-snap-align: start;
+}
+
+/* Stagger children when parent revealed */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.12s; }
+.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.19s; }
+.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.26s; }
+.reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.33s; }
+.reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 0.4s; }
+
+.reveal-stagger.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ——— Mobile responsive enhancements ——— */
+@media (max-width: 992px) {
+  section {
+    padding: 80px 6% !important;
+  }
+
+  .site-footer {
+    padding: 40px 6%;
+  }
+
+  .footer-container {
+    gap: 28px;
+  }
+
+  .hero-image img {
+    height: auto;
+    max-height: 420px;
+  }
+
+  .about-image img {
+    height: auto;
+    max-height: 480px;
+  }
+
+  .pricing-grid,
+  .portfolio-grid,
+  .service-grid,
+  .team-grid,
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .home-hero-wrap .hero,
+  .hero {
+    gap: 32px;
+  }
+
+  .hero-buttons {
+    flex-wrap: wrap;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .pricing-grid,
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-grid.slider-track,
+  .service-grid.slider-track {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 20px;
+    padding-bottom: 12px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .portfolio-grid.slider-track > *,
+  .service-grid.slider-track > * {
+    min-width: min(85vw, 320px);
+    flex-shrink: 0;
+  }
+
+  .auth-layout {
+    border-radius: 20px;
+  }
+
+  .contact-section {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .site-footer {
+    padding: 32px 5%;
+  }
+
+  .social-icons {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .section-title h2 {
+    font-size: 32px !important;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

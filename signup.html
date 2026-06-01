@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up - Stackly Digital Marketing</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="./components/base.css" />
+  <link rel="stylesheet" href="./components/layout.css" />
+  <link rel="stylesheet" href="./auth.css" />
+</head>
+
+<body class="page-inner auth-page">
+
+  <div id="site-header"></div>
+
+  <main class="auth-main">
+    <section class="auth-layout">
+      <div class="auth-brand">
+        <a href="./index.html"><img class="auth-brand__logo" src="./images/logo.webp" alt="Stackly"></a>
+        <h2>Start Your Digital Growth Journey</h2>
+        <p>Join Stackly and unlock tools built for modern marketing teams.</p>
+        <ul class="auth-perks">
+          <li><i class="fas fa-rocket"></i> Launch campaigns in minutes</li>
+          <li><i class="fas fa-users"></i> Collaborate with your team</li>
+          <li><i class="fas fa-shield-halved"></i> Secure &amp; reliable platform</li>
+        </ul>
+      </div>
+
+      <div class="auth-card">
+        <span class="auth-card__eyebrow">Get started</span>
+        <h1>Create your account</h1>
+        <p class="auth-card__sub">Free to join. No credit card required.</p>
+
+        <form class="auth-form" id="signupForm" novalidate>
+          <div class="auth-field">
+            <label for="signupName">Full name</label>
+            <div class="auth-input-wrap">
+              <i class="fas fa-user"></i>
+              <input type="text" id="signupName" name="name" placeholder="John Doe" required autocomplete="name">
+            </div>
+          </div>
+
+          <div class="auth-field">
+            <label for="signupRole">Role</label>
+            <div class="auth-input-wrap auth-select-wrap">
+              <i class="fas fa-user-shield"></i>
+              <select id="signupRole" name="role" required>
+                <option value="" disabled selected>Select your role</option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="auth-field">
+            <label for="signupEmail">Email address</label>
+            <div class="auth-input-wrap">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="signupEmail" name="email" placeholder="you@company.com" required autocomplete="email">
+            </div>
+          </div>
+
+          <div class="auth-field">
+            <label for="signupPassword">Password</label>
+            <div class="auth-input-wrap">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="signupPassword" name="password" placeholder="Create a password" required autocomplete="new-password" minlength="6">
+              <button type="button" class="toggle-password" aria-label="Show password">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="auth-field">
+            <label for="confirmPassword">Confirm password</label>
+            <div class="auth-input-wrap">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required autocomplete="new-password" minlength="6">
+              <button type="button" class="toggle-password" aria-label="Show password">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <label class="auth-terms">
+            <input type="checkbox" id="terms" name="terms">
+            <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
+          </label>
+
+          <button type="submit" class="auth-submit">Create Account</button>
+        </form>
+
+        <div class="auth-divider">or sign up with</div>
+
+        <div class="auth-social">
+          <button type="button" class="auth-social-btn">
+            <i class="fab fa-google"></i> Google
+          </button>
+          <button type="button" class="auth-social-btn">
+            <i class="fab fa-linkedin-in"></i> LinkedIn
+          </button>
+        </div>
+
+        <p class="auth-footer-text">
+          Already have an account? <a href="./login.html">Sign in</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="./components/loading.js"></script>
+  <script src="./components/layout.js"></script>
+  <script src="./auth.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Stackly Digital Marketing</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="./components/base.css" />
+  <link rel="stylesheet" href="./components/layout.css" />
+  <link rel="stylesheet" href="./auth.css" />
+</head>
+
+<body class="page-inner auth-page">
+
+  <div id="site-header"></div>
+
+  <main class="auth-main">
+    <section class="auth-layout">
+      <div class="auth-brand">
+        <a href="./index.html"><img class="auth-brand__logo" src="./images/logo.webp" alt="Stackly"></a>
+        <h2>Grow Your Brand With Powerful Marketing</h2>
+        <p>Sign in to access your dashboard, campaigns, and performance insights.</p>
+        <ul class="auth-perks">
+          <li><i class="fas fa-chart-line"></i> Track campaign performance</li>
+          <li><i class="fas fa-bullseye"></i> Manage leads &amp; conversions</li>
+          <li><i class="fas fa-headset"></i> Priority expert support</li>
+        </ul>
+      </div>
+
+      <div class="auth-card">
+        <span class="auth-card__eyebrow">Welcome back</span>
+        <h1>Sign in to Stackly</h1>
+        <p class="auth-card__sub">Enter your details to continue to your account.</p>
+
+        <form class="auth-form" id="loginForm" novalidate>
+          <div class="auth-field">
+            <label for="loginEmail">Email address</label>
+            <div class="auth-input-wrap">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="loginEmail" name="email" placeholder="you@company.com" required autocomplete="email">
+            </div>
+          </div>
+
+          <div class="auth-field">
+            <label for="loginRole">Role</label>
+            <div class="auth-input-wrap auth-select-wrap">
+              <i class="fas fa-user-shield"></i>
+              <select id="loginRole" name="role" required>
+                <option value="" disabled selected>Select your role</option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="auth-field">
+            <label for="loginPassword">Password</label>
+            <div class="auth-input-wrap">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required autocomplete="current-password">
+              <button type="button" class="toggle-password" aria-label="Show password">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="auth-row">
+            <label class="auth-remember">
+              <input type="checkbox" id="rememberMe" name="remember">
+              Remember me
+            </label>
+            <a href="#" class="auth-link">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="auth-submit">Sign In</button>
+        </form>
+
+        <div class="auth-divider">or continue with</div>
+
+        <div class="auth-social">
+          <button type="button" class="auth-social-btn">
+            <i class="fab fa-google"></i> Google
+          </button>
+          <button type="button" class="auth-social-btn">
+            <i class="fab fa-linkedin-in"></i> LinkedIn
+          </button>
+        </div>
+
+        <p class="auth-footer-text">
+          Don&apos;t have an account? <a href="./signup.html">Create one free</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="./components/loading.js"></script>
+  <script src="./components/layout.js"></script>
+  <script src="./auth.js"></script>
+
+</body>
+</html>

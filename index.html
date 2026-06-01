@@ -10,32 +10,20 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="./components/base.css" />
+<link rel="stylesheet" href="./styles.css" />
+<link rel="stylesheet" href="./components/layout.css" />
+<link rel="stylesheet" href="./components/page-hero.css" />
 </head>
 
 <body>
 
-  <!-- HEADER -->
+  <div id="site-header"></div>
 
-  <header class="header">
-
-    <nav class="navbar">
-
-      <div class="logo">Stackly</div>
-      
-
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#team">Team</a></li>
-        <li><a href="#testimonials">Reviews</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-
-      <button class="menu-btn" id="menuBtn">☰</button>
-
-    </nav>
+  <header class="header home-hero-wrap">
 
     <!-- HERO SECTION -->
 
@@ -60,34 +48,37 @@
           <a href="#" class="btn secondary-btn">Learn More</a>
         </div>
 
-        <div class="hero-stats">
-
-          <div>
-            <h2 class="counter" data-target="500">0</h2>
-            <p>Projects</p>
-          </div>
-
-          <div>
-            <h2 class="counter" data-target="120">0</h2>
-            <p>Clients</p>
-          </div>
-
-          <div>
-            <h2 class="counter" data-target="99">0</h2>
-            <p>Success %</p>
-          </div>
-
-        </div>
-
       </div>
 
       <div class="hero-image">
-        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop" alt="">
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&fm=webp&q=80" alt="">
       </div>
 
     </section>
 
   </header>
+
+  <!-- STATS -->
+  <section class="stats-section" aria-label="Our achievements">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <h3 class="stat-number counter" data-target="150" data-suffix="+">0</h3>
+        <p>Projects Completed</p>
+      </div>
+      <div class="stat-item">
+        <h3 class="stat-number counter" data-target="120" data-suffix="+">0</h3>
+        <p>Happy Clients</p>
+      </div>
+      <div class="stat-item">
+        <h3 class="stat-number counter" data-target="10" data-suffix="+">0</h3>
+        <p>Years Experience</p>
+      </div>
+      <div class="stat-item">
+        <h3 class="stat-number counter" data-target="25" data-suffix="+">0</h3>
+        <p>Team Members</p>
+      </div>
+    </div>
+  </section>
 
   <!-- SERVICES -->
 
@@ -102,7 +93,7 @@
     <div class="service-grid">
 
       <div class="service-card">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop" alt="">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&fm=webp&q=80" alt="">
         <div class="card-content">
           <h3>SEO Optimization</h3>
           <p>Improve Google rankings and increase website traffic.</p>
@@ -110,7 +101,7 @@
       </div>
 
       <div class="service-card">
-        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1200&auto=format&fit=crop" alt="">
+        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&fm=webp&q=80" alt="">
         <div class="card-content">
           <h3>Social Media Marketing</h3>
           <p>Build strong audience engagement with creative campaigns.</p>
@@ -118,7 +109,7 @@
       </div>
 
       <div class="service-card">
-        <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=1200&auto=format&fit=crop" alt="">
+        <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&fm=webp&q=80" alt="">
         <div class="card-content">
           <h3>Brand Strategy</h3>
           <p>Create strong identity and improve business visibility.</p>
@@ -134,7 +125,7 @@
   <section class="about" id="about">
 
     <div class="about-image">
-      <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop" alt="">
+      <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&fm=webp&q=80" alt="">
     </div>
 
     <div class="about-content">
@@ -158,40 +149,251 @@
 
   </section>
 
-  <!-- TEAM -->
+  
 
-  <section class="team" id="team">
+ 
 
-    <div class="section-title">
-      <span>OUR TEAM</span>
-      <h2>Meet Our Experts</h2>
+  <!-- WHY CHOOSE US -->
+
+<section class="why-us">
+
+  <div class="section-title">
+    <span>WHY CHOOSE US</span>
+    <h2>Why Businesses Trust Us</h2>
+  </div>
+
+  <div class="why-grid">
+
+    <div class="why-card">
+      <h3>🚀 Proven Growth</h3>
+      <p>Data-driven marketing strategies for measurable business growth.</p>
     </div>
 
-    <div class="team-grid">
-
-      <div class="team-card">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="">
-        <h3>David Miller</h3>
-        <p>SEO Specialist</p>
-      </div>
-
-      <div class="team-card">
-        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
-        <h3>Sophia Lee</h3>
-        <p>Social Media Expert</p>
-      </div>
-
-      <div class="team-card">
-        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="">
-        <h3>James Wilson</h3>
-        <p>Creative Designer</p>
-      </div>
-
+    <div class="why-card">
+      <h3>🎯 Targeted Campaigns</h3>
+      <p>Reach your ideal audience through advanced targeting.</p>
     </div>
 
-  </section>
+    <div class="why-card">
+      <h3>📈 Higher ROI</h3>
+      <p>Optimized campaigns that maximize return on investment.</p>
+    </div>
 
-  <!-- CONTACT -->
+    <div class="why-card">
+      <h3>💡 Creative Ideas</h3>
+      <p>Innovative marketing concepts to boost brand awareness.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PORTFOLIO -->
+
+<section class="portfolio">
+
+  <div class="section-title">
+    <span>OUR PORTFOLIO</span>
+    <h2>Recent Projects</h2>
+    <p>Successful campaigns that helped brands grow online.</p>
+  </div>
+
+  <div class="portfolio-grid">
+
+    <!-- Project 1 -->
+
+    <div class="portfolio-card">
+      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&fm=webp&q=80" alt="SEO Project">
+
+      <div class="portfolio-content">
+        <h3>E-Commerce SEO Growth</h3>
+
+        <p>
+          Increased organic traffic by 280% through technical SEO and content optimization.
+        </p>
+
+        <span>SEO Marketing</span>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+
+    <div class="portfolio-card">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&fm=webp&q=80" alt="Social Media Campaign">
+
+      <div class="portfolio-content">
+        <h3>Social Media Campaign</h3>
+
+        <p>
+          Generated 1.2M impressions and boosted engagement by 350%.
+        </p>
+
+        <span>Social Media</span>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+
+    <div class="portfolio-card">
+      <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&fm=webp&q=80" alt="Google Ads">
+
+      <div class="portfolio-content">
+        <h3>Google Ads Conversion</h3>
+
+        <p>
+          Reduced cost per lead by 42% while increasing conversions.
+        </p>
+
+        <span>PPC Advertising</span>
+      </div>
+    </div>
+
+    <!-- Project 4 -->
+
+    <div class="portfolio-card">
+      <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&fm=webp&q=80" alt="Branding">
+
+      <div class="portfolio-content">
+        <h3>Brand Identity Design</h3>
+
+        <p>
+          Complete branding transformation for a startup company.
+        </p>
+
+        <span>Brand Strategy</span>
+      </div>
+    </div>
+
+    <!-- Project 5 -->
+
+    <div class="portfolio-card">
+      <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&fm=webp&q=80" alt="Content Marketing">
+
+      <div class="portfolio-content">
+        <h3>Content Marketing</h3>
+
+        <p>
+          Built authority through blogs, videos, and social content.
+        </p>
+
+        <span>Content Marketing</span>
+      </div>
+    </div>
+
+    <!-- Project 6 -->
+
+    <div class="portfolio-card">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&fm=webp&q=80" alt="Analytics">
+
+      <div class="portfolio-content">
+        <h3>Analytics Dashboard</h3>
+
+        <p>
+          Real-time performance tracking and campaign reporting.
+        </p>
+
+        <span>Data Analytics</span>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- PRICING -->
+
+<section class="pricing">
+
+  <div class="section-title">
+    <span>PRICING PLANS</span>
+    <h2>Choose Your Package</h2>
+  </div>
+
+  <div class="pricing-grid">
+
+    <div class="price-card">
+      <h3>Starter</h3>
+      <h2>₹9,999</h2>
+      <ul>
+        <li>SEO Audit</li>
+        <li>Social Setup</li>
+        <li>Monthly Report</li>
+      </ul>
+      <button>Choose Plan</button>
+    </div>
+
+    <div class="price-card featured">
+      <h3>Professional</h3>
+      <h2>₹24,999</h2>
+      <ul>
+        <li>Advanced SEO</li>
+        <li>Google Ads</li>
+        <li>Content Marketing</li>
+      </ul>
+      <button>Choose Plan</button>
+    </div>
+
+    <div class="price-card">
+      <h3>Enterprise</h3>
+      <h2>₹49,999</h2>
+      <ul>
+        <li>Full Marketing</li>
+        <li>Dedicated Manager</li>
+        <li>24/7 Support</li>
+      </ul>
+      <button>Choose Plan</button>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FAQ -->
+
+<section class="faq">
+
+  <div class="section-title">
+    <span>FAQ</span>
+    <h2>Frequently Asked Questions</h2>
+  </div>
+
+  <div class="faq-container">
+
+    <div class="faq-item">
+      <button class="faq-question">
+        How long does SEO take?
+      </button>
+      <div class="faq-answer">
+        SEO results generally take 3 to 6 months.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Do you provide Google Ads services?
+      </button>
+      <div class="faq-answer">
+        Yes, we manage complete PPC campaigns.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Can you manage social media accounts?
+      </button>
+      <div class="faq-answer">
+        Yes, including content creation and promotions.
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+ <!-- CONTACT -->
 
   <section class="contact" id="contact">
 
@@ -223,41 +425,28 @@
 
   </section>
 
-  <!-- FOOTER -->
 
-  <footer>
+<!-- CTA -->
 
-    <div class="footer-container">
+<section class="cta-banner">
 
-      <div>
-        <h2>Stackly</h2>
-        <p>Creative digital marketing solutions.</p>
-      </div>
+  <h2>Ready To Scale Your Business?</h2>
 
-      <div>
-        <h3>Quick Links</h3>
-        <ul>
-          <li>Home</li>
-          <li>Services</li>
-          <li>About</li>
-        </ul>
-      </div>
+  <p>
+    Let's create marketing campaigns that drive real results.
+  </p>
 
-      <div>
-        <h3>Contact</h3>
-        <p>Email: info@stackly.com</p>
-        <p>Phone: +91 9876543210</p>
-      </div>
+  <a href="#" class="btn primary-btn">
+    Book Free Consultation
+  </a>
 
-    </div>
+</section>
 
-    <div class="copyright">
-      © 2026 Stackly. All Rights Reserved.
-    </div>
+  <div id="site-footer"></div>
 
-  </footer>
-
-  <script src="./script.js"></script>
+  <script src="./components/loading.js"></script>
+  <script src="./components/layout.js"></script>
+  <script src="script.js"></script>
 
 </body>
 </html>
