@@ -275,22 +275,30 @@ section{
     padding:10px 0;
 }
 
-.price-card button{
+.price-card .choose-plan-btn{
     margin-top:25px;
     border:none;
-    background:#14f1c1;
+    background:linear-gradient(135deg,#14f1c1,#14b8a6);
     color:#081222;
     padding:14px 30px;
     border-radius:50px;
     cursor:pointer;
-    font-weight:600;
-    transition:transform .35s ease, box-shadow .35s ease, background .35s ease;
+    font-weight:700;
+    font-size:0.95rem;
+    letter-spacing:.01em;
+    transition:transform .35s ease, box-shadow .35s ease, background .35s ease, filter .35s ease;
+    box-shadow:0 10px 22px rgba(20,184,166,.25);
 }
 
-.price-card button:hover{
-    transform:translateY(-2px);
-    box-shadow:0 14px 28px rgba(20,184,166,.24);
+.price-card .choose-plan-btn:hover{
+    transform:translateY(-3px) scale(1.03);
+    box-shadow:0 16px 32px rgba(20,184,166,.34);
     background:linear-gradient(135deg,#12d4ac,#0ebf95);
+    filter:saturate(1.08);
+}
+
+.price-card .choose-plan-btn:active{
+    transform:translateY(-1px) scale(1.01);
 }
 
 .featured{

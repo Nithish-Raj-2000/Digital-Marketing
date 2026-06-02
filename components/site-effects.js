@@ -5,17 +5,24 @@ function goTo404(source) {
   window.location.href = url;
 }
 
+function getClickElement(target) {
+  if (target instanceof Element) return target;
+  if (target && target.parentElement instanceof Element) return target.parentElement;
+  return null;
+}
+
 function isSiteNavigationClick(el) {
   return Boolean(
     el.closest(
-      '#site-header, .site-header, .navbar, .nav-menu, .nav-links, .nav-actions, .menu-btn, .btn-nav, .footer-col--links a, .footer-logo'
+      '#site-header, .site-header, .navbar, .nav-menu, .nav-links, .nav-actions, .menu-btn, .menu-close-btn, .btn-nav, .mobile-go-home-btn, .footer-col--links a, .footer-logo'
     )
   );
 }
 
 function initFooterSocialRedirect() {
   document.addEventListener('click', (e) => {
-    const link = e.target.closest('.social-icons a');
+    const clicked = getClickElement(e.target);
+    const link = clicked?.closest('.social-icons a');
     if (!link) return;
     e.preventDefault();
     const label = link.getAttribute('aria-label') || 'social';
@@ -28,6 +35,7 @@ function isExcludedButton(el) {
   if (isSiteNavigationClick(el)) return true;
   if (el.classList.contains('faq-question')) return true;
   if (el.classList.contains('toggle-password')) return true;
+  if (el.closest('form')) return true;
   if (el.dataset.noRedirect === 'true') return true;
   if (el.closest('form.auth-form')) return true;
   return false;
@@ -35,9 +43,11 @@ function isExcludedButton(el) {
 
 function initButtonRedirect() {
   document.addEventListener('click', (e) => {
-    if (isSiteNavigationClick(e.target)) return;
+    const clicked = getClickElement(e.target);
+    if (!clicked) return;
+    if (isSiteNavigationClick(clicked)) return;
 
-    const target = e.target.closest(
+    const target = clicked.closest(
       'button:not(.menu-btn):not(.toggle-password):not(.faq-question), a.btn:not(.btn-nav), a.primary-btn, a.secondary-btn, a.cta-btn, .auth-submit, .auth-social-btn, .price-card button'
     );
 

@@ -324,6 +324,40 @@ section{
   margin-bottom:20px;
   border:none;
   border-radius:12px;
+  border:2px solid transparent;
+  background:#ffffff;
+  outline:none;
+  transition:border-color .25s ease, box-shadow .25s ease, background-color .25s ease;
+}
+
+.contact input:focus,
+.contact textarea:focus{
+  border-color:#14f1c1;
+  box-shadow:0 0 0 3px rgba(20,241,193,.18);
+}
+
+.contact .form-field{
+  margin-bottom:2px;
+}
+
+.contact .error-message{
+  display:none;
+  text-align:left;
+  font-size:12px;
+  color:#fca5a5;
+  margin:-12px 0 14px 4px;
+  font-weight:500;
+}
+
+.contact .error-message.show{
+  display:block;
+}
+
+.contact input.error,
+.contact textarea.error{
+  border-color:#f87171;
+  background:#ffffff;
+  box-shadow:0 0 0 3px rgba(248,113,113,.15);
 }
 
 @media(max-width:992px){
@@ -388,7 +422,7 @@ section{
 
 .why-card{
   background:white;
-  padding:30px;
+  padding:20px;
   border-radius:20px;
   text-align:center;
   box-shadow:0 10px 30px rgba(0,0,0,0.08);
@@ -396,6 +430,11 @@ section{
   position: relative;
   cursor: pointer;
   overflow: hidden;
+}
+
+.why-card p{
+  padding:10px;
+  color: black;
 }
 
 .why-card::before {
@@ -501,6 +540,31 @@ section{
 
 .price-card li{
   margin:12px 0;
+}
+
+.price-card .choose-plan-btn{
+  margin-top:24px;
+  border:none;
+  background:linear-gradient(135deg,#14f1c1,#14b8a6);
+  color:#081222;
+  padding:13px 28px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:700;
+  font-size:0.95rem;
+  letter-spacing:.01em;
+  transition:transform .28s ease, box-shadow .28s ease, filter .28s ease;
+  box-shadow:0 10px 22px rgba(20,184,166,.25);
+}
+
+.price-card .choose-plan-btn:hover{
+  transform:translateY(-3px) scale(1.03);
+  box-shadow:0 16px 30px rgba(20,184,166,.35);
+  filter:saturate(1.08);
+}
+
+.price-card .choose-plan-btn:active{
+  transform:translateY(-1px) scale(1.01);
 }
 
 .featured{

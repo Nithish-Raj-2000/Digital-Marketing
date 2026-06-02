@@ -7,6 +7,7 @@ const EMBEDDED_HEADER = `<header class="site-header">
     </div>
     <button class="menu-btn" id="menuBtn" type="button" aria-label="Toggle menu">☰</button>
     <div class="nav-menu" id="navMenu">
+      <button class="menu-close-btn" id="menuCloseBtn" type="button" aria-label="Close menu">✕</button>
       <ul class="nav-links" id="navLinks">
         <li><a href="./index.html">Home</a></li>
         <li><a href="./service.html">Services</a></li>
@@ -17,6 +18,7 @@ const EMBEDDED_HEADER = `<header class="site-header">
         <a href="./login.html" class="btn-nav btn-nav--login" data-auth="login">Login</a>
         <a href="./signup.html" class="btn-nav btn-nav--signup" data-auth="signup">Sign Up</a>
       </div>
+      <a href="./index.html" class="mobile-go-home-btn">Go Home</a>
     </div>
   </nav>
 </header>`;
@@ -59,45 +61,93 @@ function getCurrentPage() {
   return file.split('?')[0].toLowerCase();
 }
 
+function getLayoutClickTarget(event) {
+  const target = event.target;
+  if (target instanceof Element) return target;
+  if (target && target.parentElement instanceof Element) return target.parentElement;
+  return null;
+}
+
 function closeMobileMenu() {
   const navMenu = document.getElementById('navMenu');
+  const menuBtn = document.getElementById('menuBtn');
   if (navMenu) {
     navMenu.classList.remove('active');
+  }
+  if (menuBtn) {
+    menuBtn.setAttribute('aria-expanded', 'false');
   }
   document.body.classList.remove('nav-open');
 }
 
+function navigateFromMenu(href) {
+  closeMobileMenu();
+  if (href) {
+    window.location.assign(href);
+  }
+}
+
+function bindMobileNavLinks() {
+  const navMenu = document.getElementById('navMenu');
+  if (!navMenu) return;
+
+  navMenu.querySelectorAll('a[href]').forEach((link) => {
+    if (link.dataset.navBound === 'true') return;
+    link.dataset.navBound = 'true';
+
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      navigateFromMenu(link.getAttribute('href'));
+    });
+  });
+}
+
 function initMobileMenu() {
   if (document.documentElement.dataset.navMenuBound === 'true') {
+    bindMobileNavLinks();
     return;
   }
   document.documentElement.dataset.navMenuBound = 'true';
 
-  document.addEventListener('click', (event) => {
-    const navMenu = document.getElementById('navMenu');
-    if (!navMenu) {
-      return;
-    }
+  document.addEventListener(
+    'click',
+    (event) => {
+      const target = getLayoutClickTarget(event);
+      const navMenu = document.getElementById('navMenu');
+      if (!navMenu || !target) return;
 
-    const menuBtn = event.target.closest('#menuBtn, .menu-btn');
-    if (menuBtn) {
-      event.preventDefault();
-      navMenu.classList.toggle('active');
-      document.body.classList.toggle('nav-open', navMenu.classList.contains('active'));
-      menuBtn.setAttribute('aria-expanded', navMenu.classList.contains('active'));
-      return;
-    }
+      if (target.closest('#menuBtn, .menu-btn')) {
+        event.preventDefault();
+        const isOpen = navMenu.classList.toggle('active');
+        document.body.classList.toggle('nav-open', isOpen);
+        document.getElementById('menuBtn')?.setAttribute('aria-expanded', String(isOpen));
+        return;
+      }
 
-    if (event.target.closest('.nav-backdrop')) {
-      closeMobileMenu();
-      return;
-    }
+      if (target.closest('#menuCloseBtn, .menu-close-btn')) {
+        event.preventDefault();
+        event.stopPropagation();
+        closeMobileMenu();
+        return;
+      }
 
-    const navLink = event.target.closest('.nav-links a, .nav-actions a');
-    if (navLink && navMenu.contains(navLink)) {
-      closeMobileMenu();
-    }
-  });
+      if (target.closest('.nav-backdrop')) {
+        closeMobileMenu();
+        return;
+      }
+
+      const navLink = target.closest('.nav-links a, .nav-actions a, .mobile-go-home-btn');
+      if (navLink && navMenu.contains(navLink)) {
+        event.preventDefault();
+        event.stopPropagation();
+        navigateFromMenu(navLink.getAttribute('href'));
+      }
+    },
+    true
+  );
+
+  bindMobileNavLinks();
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
@@ -171,6 +221,7 @@ async function fetchComponent(path) {
 function initHeader() {
   ensureNavBackdrop();
   initMobileMenu();
+  bindMobileNavLinks();
   setActiveNavLink();
   updateAuthNavButtons();
 }
@@ -205,6 +256,7 @@ async function loadLayout() {
 
 document.addEventListener('layout-ready', () => {
   initHeader();
+  bindMobileNavLinks();
 });
 
 function ensureFontAwesome() {

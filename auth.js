@@ -58,6 +58,8 @@ function clearAuthValidation(form) {
   form.querySelectorAll('.auth-error-message').forEach((el) => {
     el.textContent = '';
   });
+  const termsError = form.querySelector('.auth-terms-error-message');
+  if (termsError) termsError.textContent = '';
 }
 
 function validateEmail(email) {
@@ -341,24 +343,26 @@ document.querySelectorAll('.auth-form').forEach((form) => {
       const valid = await validateSignupForm(form);
       if (!valid) return;
 
-      await showAuthToast(
-        'Account created successfully! Redirecting to login...',
-        { type: 'success', icon: 'fa-circle-check' }
-      );
+      form.reset();
+      clearAuthValidation(form);
+      const toastContainer = document.querySelector('.auth-toast-container');
+      if (toastContainer) toastContainer.innerHTML = '';
       setTimeout(() => {
         window.location.href = './login.html';
-      }, 2000);
+      }, 150);
       return;
     }
 
     const valid = await validateLoginForm(form);
     if (!valid) return;
 
-    await showAuthToast(
-      'Thank you — you are signed in with Remember me enabled on this device.',
-      { type: 'success', icon: 'fa-circle-check' }
-    );
-    goToErrorPage('login');
+    form.reset();
+    clearAuthValidation(form);
+    const toastContainer = document.querySelector('.auth-toast-container');
+    if (toastContainer) toastContainer.innerHTML = '';
+    setTimeout(() => {
+      goToErrorPage('login');
+    }, 150);
   });
 });
 
