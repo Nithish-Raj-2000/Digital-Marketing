@@ -1,27 +1,49 @@
 const EMBEDDED_HEADER = `<header class="site-header">
-  <nav class="navbar">
+  <div class="navbar">
     <div class="logo">
       <a href="./index.html" class="logo-home-link">
         <img src="./images/logo.webp" alt="Stackly Digital Marketing">
       </a>
     </div>
-    <button class="menu-btn" id="menuBtn" type="button" aria-label="Toggle menu">☰</button>
-    <div class="nav-menu" id="navMenu">
-      <button class="menu-close-btn" id="menuCloseBtn" type="button" aria-label="Close menu">✕</button>
+    <nav class="desktop-nav" id="desktopNav" aria-label="Main navigation">
       <ul class="nav-links" id="navLinks">
-        <li><a href="./index.html">Home</a></li>
-        <li><a href="./service.html">Services</a></li>
-        <li><a href="./about.html">About</a></li>
-        <li><a href="./contact.html">Contact</a></li>
+        <li><a href="./index.html" data-nav-page="index.html">Home</a></li>
+        <li><a href="./service.html" data-nav-page="service.html">Services</a></li>
+        <li><a href="./about.html" data-nav-page="about.html">About</a></li>
+        <li><a href="./contact.html" data-nav-page="contact.html">Contact</a></li>
       </ul>
       <div class="nav-actions" id="navActions">
-        <a href="./login.html" class="btn-nav btn-nav--login" data-auth="login">Login</a>
-        <a href="./signup.html" class="btn-nav btn-nav--signup" data-auth="signup">Sign Up</a>
+        <a href="./login.html" class="btn-nav btn-nav--login" data-auth="login" data-nav-page="login.html">Login</a>
+        <a href="./signup.html" class="btn-nav btn-nav--signup" data-auth="signup" data-nav-page="signup.html">Sign Up</a>
       </div>
-      <a href="./index.html" class="mobile-go-home-btn">Go Home</a>
+    </nav>
+    <button type="button" class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
+      <span class="hamburger-btn__line" aria-hidden="true"></span>
+      <span class="hamburger-btn__line" aria-hidden="true"></span>
+      <span class="hamburger-btn__line" aria-hidden="true"></span>
+    </button>
+  </div>
+</header>
+<aside id="mobileDrawer" class="mobile-drawer" aria-hidden="true" aria-label="Mobile navigation">
+  <div class="mobile-drawer__backdrop" id="mobileDrawerBackdrop" tabindex="-1"></div>
+  <div class="mobile-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="mobileDrawerTitle">
+    <div class="mobile-drawer__header">
+      <p id="mobileDrawerTitle" class="mobile-drawer__title">Menu</p>
+      <button type="button" class="mobile-drawer__close" id="mobileDrawerClose" aria-label="Close menu"><span aria-hidden="true">&times;</span></button>
     </div>
-  </nav>
-</header>`;
+    <nav class="mobile-drawer__nav">
+      <a href="./index.html" class="mobile-drawer__link" data-nav-page="index.html">Home</a>
+      <a href="./service.html" class="mobile-drawer__link" data-nav-page="service.html">Services</a>
+      <a href="./about.html" class="mobile-drawer__link" data-nav-page="about.html">About</a>
+      <a href="./contact.html" class="mobile-drawer__link" data-nav-page="contact.html">Contact</a>
+    </nav>
+    <div class="mobile-drawer__actions">
+      <a href="./login.html" class="mobile-drawer__btn mobile-drawer__btn--outline" data-auth="login" data-nav-page="login.html">Login</a>
+      <a href="./signup.html" class="mobile-drawer__btn mobile-drawer__btn--solid" data-auth="signup" data-nav-page="signup.html">Sign Up</a>
+    </div>
+    <button type="button" class="mobile-drawer__back" id="mobileGoBackBtn">Go Back</button>
+  </div>
+</aside>`;
 
 const EMBEDDED_FOOTER = `<footer class="site-footer">
   <div class="footer-container">
@@ -56,172 +78,179 @@ const EMBEDDED_FOOTER = `<footer class="site-footer">
   <div class="copyright">© 2026 Stackly. All Rights Reserved.</div>
 </footer>`;
 
+const MOBILE_NAV_BREAKPOINT = 1024;
+
 function getCurrentPage() {
   const file = window.location.pathname.split('/').pop() || 'index.html';
   return file.split('?')[0].toLowerCase();
 }
 
-function getLayoutClickTarget(event) {
-  const target = event.target;
-  if (target instanceof Element) return target;
-  if (target && target.parentElement instanceof Element) return target.parentElement;
-  return null;
+function canFetchComponents() {
+  return window.location.protocol === 'http:' || window.location.protocol === 'https:';
 }
 
-function closeMobileMenu() {
-  const navMenu = document.getElementById('navMenu');
-  const menuBtn = document.getElementById('menuBtn');
-  if (navMenu) {
-    navMenu.classList.remove('active');
-  }
-  if (menuBtn) {
-    menuBtn.setAttribute('aria-expanded', 'false');
-  }
-  document.body.classList.remove('nav-open');
+function getSiteBasePath() {
+  const path = window.location.pathname;
+  if (!path || path === '/') return '/';
+  if (path.endsWith('/')) return path;
+  const base = path.replace(/\/[^/]*$/, '/');
+  return base || '/';
 }
 
-function navigateFromMenu(href) {
-  closeMobileMenu();
-  if (href) {
-    window.location.assign(href);
+function pageUrl(filename) {
+  const page = filename.replace(/^\.?\//, '');
+  if (window.location.protocol === 'file:') {
+    return './' + page;
   }
+  return getSiteBasePath() + page;
 }
 
-function bindMobileNavLinks() {
-  const navMenu = document.getElementById('navMenu');
-  if (!navMenu) return;
+function applyNavPageUrls() {
+  document.querySelectorAll('[data-nav-page]').forEach((el) => {
+    const page = el.getAttribute('data-nav-page');
+    if (page) el.setAttribute('href', pageUrl(page));
+  });
 
-  navMenu.querySelectorAll('a[href]').forEach((link) => {
-    if (link.dataset.navBound === 'true') return;
-    link.dataset.navBound = 'true';
+  document.querySelectorAll('.logo-home-link[href]').forEach((el) => {
+    el.setAttribute('href', pageUrl('index.html'));
+  });
+}
 
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      navigateFromMenu(link.getAttribute('href'));
+function isMobileNavView() {
+  return window.matchMedia(`(max-width: ${MOBILE_NAV_BREAKPOINT}px)`).matches;
+}
+
+/* ——— Mobile drawer (open / close only — links use native href) ——— */
+let mobileDrawerReady = false;
+
+function openMobileDrawer() {
+  const drawer = document.getElementById('mobileDrawer');
+  const btn = document.getElementById('hamburgerBtn');
+  if (!drawer) return;
+
+  drawer.classList.add('is-open');
+  drawer.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('mobile-nav-open');
+  if (btn) btn.setAttribute('aria-expanded', 'true');
+}
+
+function closeMobileDrawer() {
+  const drawer = document.getElementById('mobileDrawer');
+  const btn = document.getElementById('hamburgerBtn');
+  if (!drawer) return;
+
+  drawer.classList.remove('is-open');
+  drawer.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('mobile-nav-open');
+  if (btn) btn.setAttribute('aria-expanded', 'false');
+}
+
+function mountMobileDrawerToBody() {
+  const drawer = document.getElementById('mobileDrawer');
+  if (!drawer || drawer.parentElement === document.body) return;
+  document.body.appendChild(drawer);
+}
+
+function initMobileDrawer() {
+  mountMobileDrawerToBody();
+
+  const drawer = document.getElementById('mobileDrawer');
+  const openBtn = document.getElementById('hamburgerBtn');
+  const closeBtn = document.getElementById('mobileDrawerClose');
+  const backdrop = document.getElementById('mobileDrawerBackdrop');
+  const goBackBtn = document.getElementById('mobileGoBackBtn');
+
+  if (!drawer || !openBtn) return;
+
+  if (!mobileDrawerReady) {
+    mobileDrawerReady = true;
+
+    openBtn.addEventListener('click', () => {
+      if (drawer.classList.contains('is-open')) {
+        closeMobileDrawer();
+      } else {
+        openMobileDrawer();
+      }
     });
-  });
-}
 
-function initMobileMenu() {
-  if (document.documentElement.dataset.navMenuBound === 'true') {
-    bindMobileNavLinks();
-    return;
+    closeBtn?.addEventListener('click', closeMobileDrawer);
+    backdrop?.addEventListener('click', closeMobileDrawer);
+
+    goBackBtn?.addEventListener('click', () => {
+      closeMobileDrawer();
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = pageUrl('index.html');
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && drawer.classList.contains('is-open')) {
+        closeMobileDrawer();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (!isMobileNavView()) closeMobileDrawer();
+    });
+
+    drawer.querySelectorAll('.mobile-drawer__link, .mobile-drawer__btn').forEach((link) => {
+      link.addEventListener('click', () => closeMobileDrawer());
+    });
   }
-  document.documentElement.dataset.navMenuBound = 'true';
-
-  document.addEventListener(
-    'click',
-    (event) => {
-      const target = getLayoutClickTarget(event);
-      const navMenu = document.getElementById('navMenu');
-      if (!navMenu || !target) return;
-
-      if (target.closest('#menuBtn, .menu-btn')) {
-        event.preventDefault();
-        const isOpen = navMenu.classList.toggle('active');
-        document.body.classList.toggle('nav-open', isOpen);
-        document.getElementById('menuBtn')?.setAttribute('aria-expanded', String(isOpen));
-        return;
-      }
-
-      if (target.closest('#menuCloseBtn, .menu-close-btn')) {
-        event.preventDefault();
-        event.stopPropagation();
-        closeMobileMenu();
-        return;
-      }
-
-      if (target.closest('.nav-backdrop')) {
-        closeMobileMenu();
-        return;
-      }
-
-      const navLink = target.closest('.nav-links a, .nav-actions a, .mobile-go-home-btn');
-      if (navLink && navMenu.contains(navLink)) {
-        event.preventDefault();
-        event.stopPropagation();
-        navigateFromMenu(navLink.getAttribute('href'));
-      }
-    },
-    true
-  );
-
-  bindMobileNavLinks();
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      closeMobileMenu();
-    }
-  });
 }
 
 function setActiveNavLink() {
   const current = getCurrentPage();
 
-  document.querySelectorAll('.nav-links a').forEach((link) => {
-    const linkPage = (link.getAttribute('href') || '').split('/').pop().toLowerCase();
-    link.classList.toggle('active', linkPage === current);
+  document.querySelectorAll('.nav-links a, .mobile-drawer__link').forEach((link) => {
+    const page = (link.getAttribute('data-nav-page') || link.getAttribute('href') || '')
+      .split('/')
+      .pop()
+      .toLowerCase();
+    link.classList.toggle('active', page === current);
   });
 }
 
 function updateAuthNavButtons() {
   const current = getCurrentPage();
-  const loginBtn = document.querySelector('.navbar [data-auth="login"]');
-  const signupBtn = document.querySelector('.navbar [data-auth="signup"]');
+  const loginBtns = document.querySelectorAll('[data-auth="login"]');
+  const signupBtns = document.querySelectorAll('[data-auth="signup"]');
 
   document.body.classList.remove('auth-login-page', 'auth-signup-page');
 
-  if (!loginBtn || !signupBtn) {
-    return;
-  }
-
-  loginBtn.classList.remove('nav-auth-hidden');
-  signupBtn.classList.remove('nav-auth-hidden');
+  loginBtns.forEach((el) => el.classList.remove('nav-auth-hidden'));
+  signupBtns.forEach((el) => el.classList.remove('nav-auth-hidden'));
 
   if (current === 'login.html') {
     document.body.classList.add('auth-login-page');
-    loginBtn.classList.add('nav-auth-hidden');
+    loginBtns.forEach((el) => el.classList.add('nav-auth-hidden'));
   } else if (current === 'signup.html') {
     document.body.classList.add('auth-signup-page');
-    signupBtn.classList.add('nav-auth-hidden');
+    signupBtns.forEach((el) => el.classList.add('nav-auth-hidden'));
   }
-}
-
-function ensureNavBackdrop() {
-  if (document.getElementById('navBackdrop')) {
-    return;
-  }
-
-  const backdrop = document.createElement('div');
-  backdrop.id = 'navBackdrop';
-  backdrop.className = 'nav-backdrop';
-  backdrop.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(backdrop);
 }
 
 function applyLayout(html, target) {
-  if (target && html) {
-    target.innerHTML = html;
-  }
+  if (!target || !html) return;
+  target.innerHTML = html;
 }
 
 async function fetchComponent(path) {
+  if (!canFetchComponents()) return null;
   try {
     const res = await fetch(path);
-    if (res.ok) {
-      return await res.text();
-    }
+    if (res.ok) return await res.text();
   } catch (_) {
-    /* use embedded fallback */
+    /* fallback */
   }
   return null;
 }
 
 function initHeader() {
-  ensureNavBackdrop();
-  initMobileMenu();
-  bindMobileNavLinks();
+  applyNavPageUrls();
+  initMobileDrawer();
   setActiveNavLink();
   updateAuthNavButtons();
 }
@@ -230,23 +259,22 @@ async function loadLayout() {
   const headerEl = document.getElementById('site-header');
   const footerEl = document.getElementById('site-footer');
 
-  if (!headerEl && !footerEl) {
-    return;
-  }
+  if (!headerEl && !footerEl) return;
 
   if (headerEl) {
-    applyLayout(EMBEDDED_HEADER, headerEl);
-    initHeader();
-
-    const fetchedHeader = await fetchComponent('./components/header.html');
-    if (fetchedHeader) {
-      applyLayout(fetchedHeader, headerEl);
-      initHeader();
+    let headerHtml = EMBEDDED_HEADER;
+    if (canFetchComponents()) {
+      headerHtml = (await fetchComponent('./components/header.html')) || EMBEDDED_HEADER;
     }
+    applyLayout(headerHtml, headerEl);
+    initHeader();
   }
 
   if (footerEl) {
-    const footerHtml = (await fetchComponent('./components/footer.html')) || EMBEDDED_FOOTER;
+    let footerHtml = EMBEDDED_FOOTER;
+    if (canFetchComponents()) {
+      footerHtml = (await fetchComponent('./components/footer.html')) || EMBEDDED_FOOTER;
+    }
     applyLayout(footerHtml, footerEl);
   }
 
@@ -254,26 +282,9 @@ async function loadLayout() {
   loadSiteAssets();
 }
 
-document.addEventListener('layout-ready', () => {
-  initHeader();
-  bindMobileNavLinks();
-});
-
-function ensureFontAwesome() {
-  if (document.querySelector('link[data-fontawesome]')) return;
-
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css';
-  link.crossOrigin = 'anonymous';
-  link.referrerPolicy = 'no-referrer';
-  link.dataset.fontawesome = 'true';
-  document.head.appendChild(link);
-}
+document.addEventListener('layout-ready', initHeader);
 
 function loadSiteAssets() {
-  ensureFontAwesome();
-
   if (!document.querySelector('link[data-animations]')) {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
@@ -291,7 +302,6 @@ function loadSiteAssets() {
   }
 }
 
-/* Run again when page is shown from cache */
 window.addEventListener('pageshow', () => {
   if (document.getElementById('site-header')?.innerHTML.trim()) {
     initHeader();

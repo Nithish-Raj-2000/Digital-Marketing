@@ -133,7 +133,7 @@ textarea {
   }
 }
 
-/* Font Awesome — do not set Poppins on icon elements or ::before glyphs */
+/* Local icon fallbacks for the Font Awesome class names used in this site. */
 .fas,
 .far,
 .fab,
@@ -148,20 +148,38 @@ textarea {
   -webkit-font-smoothing: antialiased;
 }
 
-.fas,
-.fa-solid {
-  font-family: 'Font Awesome 6 Free' !important;
-  font-weight: 900;
+.fas::before,
+.far::before,
+.fab::before,
+.fa-solid::before,
+.fa-regular::before,
+.fa-brands::before {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
 }
 
-.far,
-.fa-regular {
-  font-family: 'Font Awesome 6 Free' !important;
-  font-weight: 400;
-}
-
-.fab,
-.fa-brands {
-  font-family: 'Font Awesome 6 Brands' !important;
-  font-weight: 400;
-}
+.fa-phone::before { content: "\260E"; }
+.fa-envelope::before { content: "\2709"; }
+.fa-location-dot::before { content: "\25CF"; }
+.fa-chart-line::before { content: "\2197"; }
+.fa-bullseye::before { content: "\25CE"; }
+.fa-headset::before { content: "\260E"; }
+.fa-arrow-left::before { content: "\2190"; }
+.fa-user-shield::before { content: "\25C8"; }
+.fa-lock::before { content: "\1F512"; }
+.fa-eye::before { content: "\25C9"; }
+.fa-eye-slash::before { content: "\25CC"; }
+.fa-google::before { content: "G"; }
+.fa-linkedin-in::before { content: "in"; font-size: 0.8em; }
+.fa-rocket::before { content: "\219F"; }
+.fa-users::before { content: "\25C6"; }
+.fa-shield-halved::before { content: "\25D2"; }
+.fa-user::before { content: "\25CF"; }
+.fa-check-circle::before { content: "\2713"; }
+.fa-sign-in-alt::before { content: "\2192"; }
+.fa-user-plus::before { content: "+"; }
+.fa-compass::before { content: "\25CE"; }
+.fa-home::before { content: "\2302"; }
+.fa-circle-info::before { content: "i"; }
+.fa-file-contract::before { content: "\00A7"; }
+.fa-square-check::before { content: "\2611"; }

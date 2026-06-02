@@ -16,7 +16,7 @@ img{
   display:block;
 }
 
-.header{
+.hero-banner{
   color:#fff;
 }
 
@@ -53,8 +53,7 @@ img{
   padding:8px 18px;
   border-radius:30px;
   display:inline-block;
-  margin-bottom:-80px;
-  /* margin-top: 30px; */
+  margin-bottom:12px;
 }
 
 .hero-content h1{
@@ -371,6 +370,69 @@ section{
     font-size:50px;
   }
 
+}
+
+/* Home hero — flush under fixed header on mobile & tablet */
+@media (max-width: 1024px) {
+  .home-hero-wrap {
+    margin-top: -70px;
+    padding-top: 70px;
+    min-height: auto;
+  }
+
+  .home-hero-wrap .hero {
+    min-height: 0;
+    padding: 16px 5% 32px;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .home-hero-wrap .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+  }
+
+  .home-hero-wrap .tag-home {
+    margin-bottom: 10px;
+  }
+
+  .home-hero-wrap .hero-content h1 {
+    margin-bottom: 10px;
+  }
+
+  .home-hero-wrap .hero-content p {
+    margin-bottom: 14px;
+  }
+
+  .home-hero-wrap .hero-buttons {
+    margin-bottom: 0;
+    gap: 12px;
+  }
+
+  .home-hero-wrap .hero-image img {
+    max-height: 260px;
+    border-radius: 20px;
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-hero-wrap .hero {
+    padding: 12px 5% 28px;
+    gap: 16px;
+  }
+
+  .home-hero-wrap .hero-content h1 {
+    font-size: 36px;
+    margin-bottom: 8px;
+  }
+
+  .home-hero-wrap .hero-content p {
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+  }
 }
 
 @media(max-width:600px){

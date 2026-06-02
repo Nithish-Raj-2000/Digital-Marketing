@@ -178,8 +178,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
   transition: all 0.3s ease;
   z-index: 10;
+  box-sizing: border-box;
 }
 
 .auth-back-btn:hover {

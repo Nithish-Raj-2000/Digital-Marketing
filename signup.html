@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" href="./favicon.ico">
 
   <link rel="stylesheet" href="./components/base.css" />
   <link rel="stylesheet" href="./components/layout.css" />
@@ -33,9 +33,9 @@
       </div>
 
       <div class="auth-card">
-        <button type="button" class="auth-back-btn" onclick="window.location.href='./login.html'" title="Go to login">
-          <i class="fas fa-arrow-left"></i>
-        </button>
+        <a href="./login.html" class="auth-back-btn" data-auth-back="login.html" aria-label="Go to login" title="Go to login">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i>
+        </a>
         <span class="auth-card__eyebrow">Get started</span>
         <h1>Create your account</h1>
         <p class="auth-card__sub">Free to join. No credit card required.</p>

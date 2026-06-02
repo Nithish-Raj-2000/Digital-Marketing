@@ -8,12 +8,14 @@
   background: linear-gradient(160deg, #07101f 0%, #0f172a 45%, #081222 100%);
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transition: opacity 0.35s ease, visibility 0.35s ease;
 }
 
 .site-loader.is-active {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
 .site-loader__content {

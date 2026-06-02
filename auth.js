@@ -1,5 +1,27 @@
 const ERROR_PAGE = './404.html';
 
+function authPageUrl(filename) {
+  const page = (filename || '').replace(/^\.?\//, '');
+  if (!page) return './index.html';
+  if (window.location.protocol === 'file:') {
+    return './' + page;
+  }
+  const path = window.location.pathname;
+  let base = '/';
+  if (path && path !== '/') {
+    base = path.endsWith('/') ? path : path.replace(/\/[^/]*$/, '/') || '/';
+  }
+  return base + page;
+}
+
+function initAuthBackLinks() {
+  document.querySelectorAll('.auth-back-btn[href]').forEach((link) => {
+    const page = link.getAttribute('data-auth-back') || link.getAttribute('href') || '';
+    const file = page.replace(/^\.?\//, '');
+    if (file) link.setAttribute('href', authPageUrl(file));
+  });
+}
+
 function goToErrorPage(source) {
   const url = source ? `${ERROR_PAGE}?from=${encodeURIComponent(source)}` : ERROR_PAGE;
   window.location.href = url;
@@ -321,7 +343,7 @@ document.querySelectorAll('.toggle-password').forEach((btn) => {
   });
 });
 
-document.querySelectorAll('.auth-form').forEach((form) => {
+document.querySelectorAll('#loginForm, #signupForm').forEach((form) => {
   form.querySelectorAll('input, select').forEach((el) => {
     el.addEventListener('input', () => {
       el.closest('.auth-field')?.classList.remove('auth-field--error');
@@ -366,8 +388,10 @@ document.querySelectorAll('.auth-form').forEach((form) => {
   });
 });
 
-document.querySelectorAll('.auth-social-btn').forEach((btn) => {
+document.querySelectorAll('button.auth-social-btn').forEach((btn) => {
   btn.addEventListener('click', () => {
     goToErrorPage('social');
   });
 });
+
+initAuthBackLinks();
