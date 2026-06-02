@@ -407,13 +407,22 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         Contact us today and grow your online business.
       </p>
 
-      <form>
+      <form id="homeContactForm" novalidate>
 
-        <input type="text" placeholder="Your Name">
+        <div class="form-field">
+          <input type="text" id="homeName" placeholder="Your Name" required>
+          <span class="error-message" aria-live="polite"></span>
+        </div>
 
-        <input type="email" placeholder="Your Email">
+        <div class="form-field">
+          <input type="email" id="homeEmail" placeholder="Your Email" required>
+          <span class="error-message" aria-live="polite"></span>
+        </div>
 
-        <textarea rows="5" placeholder="Your Message"></textarea>
+        <div class="form-field">
+          <textarea id="homeMessage" rows="5" placeholder="Your Message" required></textarea>
+          <span class="error-message" aria-live="polite"></span>
+        </div>
 
         <button type="submit" class="btn primary-btn">
           Send Message

@@ -1,7 +1,7 @@
 /* Shared page banner — matches contact page layout */
 
 .page-hero {
-  min-height: 90vh;
+  min-height: 85vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,15 +9,15 @@
   color: #fff;
   background-size: cover;
   background-position: center;
-  padding: 40px 8%;
+  padding: 30px 8%;
   box-sizing: border-box;
 }
 
 /* Sit flush under fixed header (service, about, contact) */
 body.page-inner .page-content > .page-hero:first-child {
-  margin-top: -90px;
-  padding-top: calc(90px + 24px);
-  min-height: calc(90vh + 90px);
+  margin-top: -110px;
+  padding-top: calc(110px + 24px);
+  min-height: calc(90vh + 110px);
 }
 
 .page-hero .hero-content {

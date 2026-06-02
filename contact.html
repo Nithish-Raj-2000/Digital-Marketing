@@ -47,19 +47,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
     <section class="contact-info">
 
-        <div class="info-card">
+        <div class="info-card" onclick="goToErrorPage('Call Us')">
             <i class="fas fa-phone"></i>
             <h3>Call Us</h3>
             <p>+91 9876543210</p>
         </div>
 
-        <div class="info-card">
+        <div class="info-card" onclick="goToErrorPage('Email Us')">
             <i class="fas fa-envelope"></i>
             <h3>Email Us</h3>
             <p>info@stacklymarketing.com</p>
         </div>
 
-        <div class="info-card">
+        <div class="info-card" onclick="goToErrorPage('Visit Office')">
             <i class="fas fa-location-dot"></i>
             <h3>Visit Office</h3>
             <p>Salem, Tamil Nadu, India</p>
@@ -75,18 +75,33 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
             <h2>Send Us A Message</h2>
 
-            <form>
+            <form id="contactForm" novalidate>
 
-                <input type="text" placeholder="Your Name">
+                <div class="form-group">
+                    <input type="text" id="name" placeholder="Your Name" required>
+                    <span class="error-message" id="nameError"></span>
+                </div>
 
-                <input type="email" placeholder="Your Email">
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Your Email" required>
+                    <span class="error-message" id="emailError"></span>
+                </div>
 
-                <input type="tel" placeholder="Phone Number">
+                <div class="form-group">
+                    <input type="tel" id="phone" placeholder="Phone Number" required>
+                    <span class="error-message" id="phoneError"></span>
+                </div>
 
-                <input type="text" placeholder="Subject">
+                <div class="form-group">
+                    <input type="text" id="subject" placeholder="Subject" required>
+                    <span class="error-message" id="subjectError"></span>
+                </div>
 
-                <textarea rows="6"
-                placeholder="Tell us about your project"></textarea>
+                <div class="form-group">
+                    <textarea id="message" rows="6"
+                    placeholder="Tell us about your project" required></textarea>
+                    <span class="error-message" id="messageError"></span>
+                </div>
 
                 <button type="submit">
                     Send Message
@@ -117,17 +132,17 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
             <div class="office-card">
                 <h3>Salem Office</h3>
-                <p>Business Hub, Salem, Tamil Nadu</p>
+                <p style="color: black;">Business Hub, Salem, Tamil Nadu</p>
             </div>
 
             <div class="office-card">
                 <h3>Bangalore Office</h3>
-                <p>Tech Park, Bangalore, Karnataka</p>
+                <p style="color: black;">Tech Park, Bangalore, Karnataka</p>
             </div>
 
             <div class="office-card">
                 <h3>Chennai Office</h3>
-                <p>IT Corridor, Chennai, Tamil Nadu</p>
+                <pstyle="color: black;"> IT Corridor, Chennai, Tamil Nadu</p>
             </div>
 
         </div>
@@ -266,6 +281,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
   <script src="./components/loading.js"></script>
   <script src="./components/layout.js"></script>
+  <script src="./auth.js"></script>
+  <script src="./contact.js"></script>
   <script src="./script.js"></script>
 
 </body>

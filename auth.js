@@ -55,30 +55,48 @@ function clearAuthValidation(form) {
   form.querySelectorAll('.auth-field--error, .auth-terms--error').forEach((el) => {
     el.classList.remove('auth-field--error', 'auth-terms--error');
   });
+  form.querySelectorAll('.auth-error-message').forEach((el) => {
+    el.textContent = '';
+  });
 }
 
-function markFieldError(inputOrSelect) {
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function setFieldError(inputOrSelect, message) {
   if (!inputOrSelect) return;
   const field = inputOrSelect.closest('.auth-field');
   if (field) field.classList.add('auth-field--error');
+  const errorMessage = field?.querySelector('.auth-error-message');
+  if (errorMessage) errorMessage.textContent = message;
+}
+
+function setTermsError(form, message) {
+  const terms = form.querySelector('.auth-terms, .auth-remember');
+  if (terms) terms.classList.add('auth-terms--error');
+  const errorMessage = form.querySelector('.auth-terms-error-message');
+  if (errorMessage) errorMessage.textContent = message;
+}
+
+function markFieldError(inputOrSelect) {
+  setFieldError(inputOrSelect, 'Please correct this field.');
 }
 
 function markTermsError(form) {
-  const terms = form.querySelector('.auth-terms');
-  if (terms) terms.classList.add('auth-terms--error');
+  setTermsError(form, 'Please agree to the terms to continue.');
 }
 
 function markRememberError(form) {
-  const row = form.querySelector('.auth-remember');
-  if (row) row.classList.add('auth-terms--error');
+  setTermsError(form, 'Please check the Remember me box to continue.');
 }
 
-async function warnEmpty(message, icon, focusEl, markEl) {
+async function warnEmpty(form, message, icon, focusEl, markEl) {
   if (markEl) {
     if (markEl.classList?.contains('auth-terms') || markEl.classList?.contains('auth-remember')) {
-      markEl.classList.add('auth-terms--error');
+      setTermsError(form, message);
     } else {
-      markFieldError(markEl);
+      setFieldError(markEl, message);
     }
   }
   await showAuthToast(message, { type: 'warning', icon });
@@ -107,7 +125,18 @@ async function validateSignupForm(form) {
 
   if (!name) {
     return warnEmpty(
+      form,
       'Full name is required. Please fill in your name to create an account.',
+      'fa-user',
+      nameInput,
+      nameInput
+    );
+  }
+
+  if (!/^[a-zA-Z\s]{2,}$/.test(name)) {
+    return warnEmpty(
+      form,
+      'Please enter a valid name using letters and spaces only.',
       'fa-user',
       nameInput,
       nameInput
@@ -116,6 +145,7 @@ async function validateSignupForm(form) {
 
   if (!role) {
     return warnEmpty(
+      form,
       'Please select your role (Admin or User) from the dropdown.',
       'fa-user-shield',
       roleSelect,
@@ -125,7 +155,18 @@ async function validateSignupForm(form) {
 
   if (!email) {
     return warnEmpty(
+      form,
       'Email address is required. Please enter your email.',
+      'fa-envelope',
+      emailInput,
+      emailInput
+    );
+  }
+
+  if (!validateEmail(email)) {
+    return warnEmpty(
+      form,
+      'Please enter a valid email address in the format you@company.com.',
       'fa-envelope',
       emailInput,
       emailInput
@@ -134,7 +175,18 @@ async function validateSignupForm(form) {
 
   if (!password) {
     return warnEmpty(
+      form,
       'Password is required. Please create a password.',
+      'fa-lock',
+      passwordInput,
+      passwordInput
+    );
+  }
+
+  if (password.length < 8) {
+    return warnEmpty(
+      form,
+      'Your password must be at least 8 characters long.',
       'fa-lock',
       passwordInput,
       passwordInput
@@ -143,6 +195,7 @@ async function validateSignupForm(form) {
 
   if (!confirm) {
     return warnEmpty(
+      form,
       'Please confirm your password by filling in the confirm password field.',
       'fa-lock',
       confirmInput,
@@ -151,8 +204,8 @@ async function validateSignupForm(form) {
   }
 
   if (password !== confirm) {
-    markFieldError(passwordInput);
-    markFieldError(confirmInput);
+    setFieldError(passwordInput, 'Passwords do not match.');
+    setFieldError(confirmInput, 'Passwords do not match.');
     await showAuthToast('Passwords do not match. Please re-enter both password fields.', {
       type: 'error',
       icon: 'fa-lock',
@@ -162,7 +215,7 @@ async function validateSignupForm(form) {
   }
 
   if (!termsChecked) {
-    markTermsError(form);
+    setTermsError(form, 'You must agree to the Terms of Service and Privacy Policy to continue.');
     await showAuthToast(
       'You must agree to continue. Please check the box to accept our Terms of Service and Privacy Policy.',
       { type: 'warning', icon: 'fa-file-contract' }
@@ -189,7 +242,18 @@ async function validateLoginForm(form) {
 
   if (!email) {
     return warnEmpty(
+      form,
       'Email address is required. Please enter your email to sign in.',
+      'fa-envelope',
+      emailInput,
+      emailInput
+    );
+  }
+
+  if (!validateEmail(email)) {
+    return warnEmpty(
+      form,
+      'Please enter a valid email address in the format you@company.com.',
       'fa-envelope',
       emailInput,
       emailInput
@@ -198,6 +262,7 @@ async function validateLoginForm(form) {
 
   if (!role) {
     return warnEmpty(
+      form,
       'Please select your role (Admin or User) from the dropdown.',
       'fa-user-shield',
       roleSelect,
@@ -207,6 +272,7 @@ async function validateLoginForm(form) {
 
   if (!password) {
     return warnEmpty(
+      form,
       'Password is required. Please enter your password to sign in.',
       'fa-lock',
       passwordInput,
@@ -214,8 +280,18 @@ async function validateLoginForm(form) {
     );
   }
 
+  if (password.length < 8) {
+    return warnEmpty(
+      form,
+      'Password must be at least 8 characters long.',
+      'fa-lock',
+      passwordInput,
+      passwordInput
+    );
+  }
+
   if (!rememberChecked) {
-    markRememberError(form);
+    setTermsError(form, 'Please check the "Remember me" checkbox to continue.');
     await showAuthToast(
       'Please agree to stay signed in by checking the "Remember me" checkbox.',
       { type: 'warning', icon: 'fa-square-check' }
@@ -266,10 +342,12 @@ document.querySelectorAll('.auth-form').forEach((form) => {
       if (!valid) return;
 
       await showAuthToast(
-        'Thank you for agreeing to our terms. Creating your account…',
+        'Account created successfully! Redirecting to login...',
         { type: 'success', icon: 'fa-circle-check' }
       );
-      goToErrorPage('signup');
+      setTimeout(() => {
+        window.location.href = './login.html';
+      }, 2000);
       return;
     }
 

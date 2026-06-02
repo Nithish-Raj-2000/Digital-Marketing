@@ -33,6 +33,9 @@
       </div>
 
       <div class="auth-card">
+        <button type="button" class="auth-back-btn" onclick="window.location.href='./login.html'" title="Go to login">
+          <i class="fas fa-arrow-left"></i>
+        </button>
         <span class="auth-card__eyebrow">Get started</span>
         <h1>Create your account</h1>
         <p class="auth-card__sub">Free to join. No credit card required.</p>
@@ -44,6 +47,7 @@
               <i class="fas fa-user"></i>
               <input type="text" id="signupName" name="name" placeholder="John Doe" required autocomplete="name">
             </div>
+            <span class="auth-error-message" aria-live="polite"></span>
           </div>
 
           <div class="auth-field">
@@ -56,6 +60,7 @@
                 <option value="user">User</option>
               </select>
             </div>
+            <span class="auth-error-message" aria-live="polite"></span>
           </div>
 
           <div class="auth-field">
@@ -64,6 +69,7 @@
               <i class="fas fa-envelope"></i>
               <input type="email" id="signupEmail" name="email" placeholder="you@company.com" required autocomplete="email">
             </div>
+            <span class="auth-error-message" aria-live="polite"></span>
           </div>
 
           <div class="auth-field">
@@ -75,6 +81,7 @@
                 <i class="fas fa-eye"></i>
               </button>
             </div>
+            <span class="auth-error-message" aria-live="polite"></span>
           </div>
 
           <div class="auth-field">
@@ -86,12 +93,14 @@
                 <i class="fas fa-eye"></i>
               </button>
             </div>
+            <span class="auth-error-message" aria-live="polite"></span>
           </div>
 
           <label class="auth-terms">
             <input type="checkbox" id="terms" name="terms">
             <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
           </label>
+          <span class="auth-error-message auth-terms-error-message" aria-live="polite"></span>
 
           <button type="submit" class="auth-submit">Create Account</button>
         </form>

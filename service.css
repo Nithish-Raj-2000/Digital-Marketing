@@ -27,30 +27,59 @@ section{
 
 .service-card{
     background:#fff;
-    border-radius:20px;
+    border-radius:24px;
     overflow:hidden;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-    transition:.4s;
+    box-shadow:0 14px 40px rgba(0,0,0,.10);
+    transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    position:relative;
+    border:1px solid rgba(20,184,166,0.08);
+}
+
+.service-card::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at top left, rgba(20,184,166,0.15), transparent 40%);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .35s ease;
 }
 
 .service-card:hover{
-    transform:translateY(-10px);
+    transform:translateY(-16px);
+    box-shadow:0 30px 70px rgba(20,184,166,0.22);
+    border-color:rgba(20,184,166,0.28);
+}
+
+.service-card:hover::before{
+    opacity:1;
 }
 
 .service-card img{
-    height:240px;
+    height:260px;
     object-fit:cover;
+    transition: transform .35s ease, filter .35s ease;
+}
+
+.service-card:hover img{
+    transform:scale(1.05);
+    filter:brightness(0.95);
 }
 
 .service-card h3{
-    padding:20px 20px 10px;
+    padding:24px 24px 12px;
+    transition: color .35s ease;
+}
+
+.service-card:hover h3{
+    color:#0f766e;
 }
 
 .service-card p{
-    padding:0 20px 25px;
+    padding:0 24px 26px;
     color:#64748b;
+    line-height:1.75;
 }
-
 /* ==========================
    WHY CHOOSE US
 ========================== */
@@ -67,10 +96,32 @@ section{
 
 .why-card{
     background:#fff;
-    padding:35px;
+    padding:32px;
     text-align:center;
-    border-radius:20px;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    border-radius:24px;
+    box-shadow:0 12px 28px rgba(0,0,0,.08);
+    transition:transform .35s ease, box-shadow .35s ease, background .35s ease;
+    position:relative;
+}
+
+.why-card::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg, rgba(20,184,166,.06), transparent 45%);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .35s ease;
+}
+
+.why-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 28px 60px rgba(20,184,166,.14);
+    background:#30e7b3;
+}
+
+.why-card:hover::after{
+    opacity:1;
 }
 
 .why-card h3{
@@ -98,9 +149,33 @@ section{
 
 .process-card{
     background:#0f172a;
-    padding:40px;
-    border-radius:20px;
+    padding:36px;
+    border-radius:24px;
     text-align:center;
+    box-shadow:0 14px 40px rgba(0,0,0,.18);
+    transition:transform .35s ease, box-shadow .35s ease, background .35s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+.process-card::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg, rgba(20,184,166,.12), transparent 45%);
+    opacity:0;
+    transition:opacity .35s ease;
+    pointer-events:none;
+}
+
+.process-card:hover{
+    transform:translateY(-12px);
+    box-shadow:0 32px 80px rgba(0,0,0,.25);
+    background:linear-gradient(180deg, #0f172a, #111f34);
+}
+
+.process-card:hover::before{
+    opacity:1;
 }
 
 .process-card span{
@@ -116,6 +191,12 @@ section{
     color:#081222;
     font-size:28px;
     font-weight:bold;
+    transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.process-card:hover span{
+    transform:scale(1.05);
+    box-shadow:0 0 0 8px rgba(20,241,193,.08);
 }
 
 /* ==========================
@@ -130,11 +211,20 @@ section{
 
 .tool-card{
     background:#fff;
-    padding:30px;
-    border-radius:15px;
+    padding:28px;
+    border-radius:18px;
     text-align:center;
     font-weight:600;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    box-shadow:0 8px 25px rgba(0,0,0,.10);
+    transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    border:1px solid transparent;
+    position:relative;
+}
+
+.tool-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 22px 55px rgba(20,184,166,.14);
+    border-color:rgba(20,184,166,.18);
 }
 
 /* ==========================
@@ -154,9 +244,19 @@ section{
 .price-card{
     background:#fff;
     padding:40px;
-    border-radius:20px;
+    border-radius:24px;
     text-align:center;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    box-shadow:0 14px 35px rgba(0,0,0,.10);
+    transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    position:relative;
+    border:1px solid transparent;
+}
+
+.price-card:hover{
+    transform:translateY(-12px);
+    box-shadow:0 28px 70px rgba(20,184,166,.16);
+    border-color:rgba(20,184,166,.24);
+    background:rgb(240, 238, 238)
 }
 
 .price-card h2{
@@ -167,6 +267,8 @@ section{
 
 .price-card ul{
     list-style:none;
+    padding:0;
+    margin:0;
 }
 
 .price-card li{
@@ -182,11 +284,21 @@ section{
     border-radius:50px;
     cursor:pointer;
     font-weight:600;
+    transition:transform .35s ease, box-shadow .35s ease, background .35s ease;
+}
+
+.price-card button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 14px 28px rgba(20,184,166,.24);
+    background:linear-gradient(135deg,#12d4ac,#0ebf95);
 }
 
 .featured{
-    /* border:3px solid #14f1c1; */
     transform:scale(1.05);
+}
+
+.featured:hover{
+    transform:scale(1.08) translateY(-12px);
 }
 
 /* ==========================
@@ -200,7 +312,15 @@ section{
 
 .faq-item{
     margin-bottom:15px;
+
 }
+
+
+  .faq-question:hover{
+    background: #14b8a6;
+    transform: translateX(5px);
+}
+
 
 .faq-question{
     width:100%;

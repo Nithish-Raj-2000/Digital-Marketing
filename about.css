@@ -6,10 +6,10 @@ img{
 .about {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  gap: 40px;
   align-items: center;
   background: #fff;
-  padding: 80px 8%;
+  padding: 50px 8%;
 }
 
 .about-image img {
